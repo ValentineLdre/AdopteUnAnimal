@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Accès personnel — Les Pattes d'Abord</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="staff-body">
+  <header class="staff-top"><a class="staff-brand" href="../index.html">🐾 Les Pattes d'Abord</a><a href="../index.html">← Retour au site</a></header>
+  <main class="login-shell">
+    <form class="panel login-panel" id="loginForm">
+      <p class="eyebrow">ESPACE RÉSERVÉ</p><h1>Accès personnel</h1>
+      <p class="muted">Connectez-vous avec les identifiants fournis par l'administrateur de l'association.</p>
+      <label for="username">Nom d'utilisateur</label><input id="username" name="username" autocomplete="username" required minlength="3" maxlength="32" placeholder="Votre nom d'utilisateur">
+      <label for="password">Mot de passe</label><input id="password" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Votre mot de passe">
+      <p class="form-error" id="loginError" role="alert" hidden></p>
+      <button class="button-primary" type="submit" id="loginButton">Se connecter</button>
+      <p class="tiny muted">Les comptes sont créés par l'administrateur. Aucune inscription publique n'est disponible.</p>
+    </form>
+  </main>
+  <script src="../js/config.js"></script><script src="../js/auth-client.js"></script><script src="../js/login.js"></script>
+</body></html>

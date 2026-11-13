@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Pattes d'Abord — Refuge d'adoption</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <svg class="paw" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 10.2c1 0 1.9-1.1 1.9-2.5S5.5 5.2 4.5 5.2s-1.9 1.1-1.9 2.5 .8 2.5 1.9 2.5zm5-1.7c1 0 1.9-1.2 1.9-2.7S10.5 3 9.5 3 7.6 4.2 7.6 5.8s.9 2.7 1.9 2.7zm5 0c1 0 1.9-1.2 1.9-2.7S15.5 3 14.5 3s-1.9 1.2-1.9 2.7 .9 2.7 1.9 2.7zm4.5 1.7c1.1 0 1.9-1.1 1.9-2.5S20.1 5.2 19 5.2s-1.9 1.1-1.9 2.5 .8 2.5 1.9 2.5zM12 11.6c-2.7 0-6.5 3.3-6.5 6.1 0 1.5 1.2 2.3 2.6 2.3.9 0 1.7-.4 2.6-.7.5-.2 1-.3 1.3-.3s.8.1 1.3.3c.9.3 1.7.7 2.6.7 1.4 0 2.6-.8 2.6-2.3 0-2.8-3.8-6.1-6.5-6.1z"/></svg>
+      Les Pattes d'Abord
+    </div>
+    <nav class="mainnav" id="mainnav">
+      <button data-page="accueil" class="active">Accueil</button>
+      <button data-page="animaux">Nos animaux</button>
+      <button data-page="apropos">À propos</button>
+      <button data-page="quizz">Quizz</button>
+      <button data-page="adopter">Je veux adopter</button>
+      <button data-page="famille">Devenir famille d'accueil</button>
+    </nav>
+    <a class="personnel-link" href="pages/connexion.html"><span aria-hidden="true">♙</span> Accès personnel</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== ACCUEIL ===================== -->
+  <section id="page-accueil" class="page active">
+    <div class="hero" id="hero1"></div>
+
+    <div class="hero sub" id="hero2"></div>
+    <div class="hero sub" id="hero3"></div>
+    <div class="hero sub" id="hero4"></div>
+
+    <div class="value-row">
+      <div class="value-cell">
+        <span class="num">312</span>
+        <h3>Animaux placés cette année</h3>
+        <p>Des familles trouvées pour des chats, chiens, rongeurs, oiseaux et reptiles de tous âges.</p>
+      </div>
+      <div class="value-cell">
+        <span class="num">100%</span>
+        <h3>Suivi post-adoption</h3>
+        <p>Un bénévole reste joignable pendant les six premiers mois pour répondre à vos questions.</p>
+      </div>
+      <div class="value-cell">
+        <span class="num">0€</span>
+        <h3>Aucune surprise</h3>
+        <p>Les frais d'adoption couvrent les soins déjà réalisés : rien d'autre n'est facturé après coup.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Chaque pensionnaire a son histoire</h2>
+          <p>Avant d'arriver chez nous, la plupart de nos animaux ont connu l'abandon ou la rue. Nous prenons le temps de les stabiliser avant de leur chercher un foyer adapté à leur caractère.</p>
+        </div>
+        <button class="btn" onclick="goToPage('animaux')">Découvrir nos protégés</button>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===================== NOS ANIMAUX ===================== -->
+  <section id="page-animaux" class="page">
+    <nav class="species-nav" id="speciesNav"></nav>
+
+    <div class="animaux-wrap">
+      <div id="listView"><div class="filters">
+        <div class="filter-field">
+          <label for="f-age">Âge</label>
+          <select id="f-age">
+            <option value="tous">Tous</option>
+            <option value="jeune">Jeune</option>
+            <option value="adulte">Adulte</option>
+            <option value="senior">Senior</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="f-caractere">Caractère</label>
+          <select id="f-caractere"></select>
+        </div>
+        <div class="filter-field">
+          <label for="f-socia">Vie sociale</label>
+          <select id="f-socia">
+            <option value="tous">Toutes</option>
+            <option value="seul">Préfère vivre seul</option>
+            <option value="groupe">À l'aise en groupe</option>
+            <option value="enfants">Compatible enfants</option>
+          </select>
+        </div>
+        <button class="reset-btn" onclick="resetFilters()">Réinitialiser</button>
+      </div>
+
+      <p class="result-count" id="resultCount"></p>
+      <div class="animal-grid" id="animalGrid"></div></div>
+      <div id="fiche" hidden></div>
+    </div>
+  </section>
+
+  <!-- ===================== A PROPOS ===================== -->
+  <section id="page-apropos" class="page">
+    <div class="container">
+
+      <div class="about-hero">
+        <div>
+          <h1 style="font-size:clamp(1.9rem,3.6vw,2.7rem); max-width:14ch;">Un refuge associatif, sans distinction d'espèce</h1>
+          <p>Les Pattes d'Abord est née en 2011 de la rencontre entre trois bénévoles d'un refuge municipal saturé. Depuis, l'association recueille, soigne et fait adopter des animaux de toutes espèces, sans limite de durée de séjour.</p>
+          <p>Nous fonctionnons uniquement grâce aux dons, aux frais d'adoption et au temps donné par une soixantaine de bénévoles actifs.</p>
+        </div>
+        <div class="art">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 10.2c1 0 1.9-1.1 1.9-2.5S5.5 5.2 4.5 5.2s-1.9 1.1-1.9 2.5 .8 2.5 1.9 2.5zm5-1.7c1 0 1.9-1.2 1.9-2.7S10.5 3 9.5 3 7.6 4.2 7.6 5.8s.9 2.7 1.9 2.7zm5 0c1 0 1.9-1.2 1.9-2.7S15.5 3 14.5 3s-1.9 1.2-1.9 2.7 .9 2.7 1.9 2.7zm4.5 1.7c1.1 0 1.9-1.1 1.9-2.5S20.1 5.2 19 5.2s-1.9 1.1-1.9 2.5 .8 2.5 1.9 2.5zM12 11.6c-2.7 0-6.5 3.3-6.5 6.1 0 1.5 1.2 2.3 2.6 2.3.9 0 1.7-.4 2.6-.7.5-.2 1-.3 1.3-.3s.8.1 1.3.3c.9.3 1.7.7 2.6.7 1.4 0 2.6-.8 2.6-2.3 0-2.8-3.8-6.1-6.5-6.1z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell"><span class="num">13</span><span class="label">Années d'existence</span></div>
+      <div class="stat-cell"><span class="num">58</span><span class="label">Bénévoles actifs</span></div>
+      <div class="stat-cell"><span class="num">2 400+</span><span class="label">Adoptions réalisées</span></div>
+      <div class="stat-cell"><span class="num">5</span><span class="label">Espèces accueillies</span></div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Notre histoire</h2>
+        </div>
+        <ul class="timeline">
+          <li>
+            <span class="year">2011</span>
+            <div><h4>Création de l'association</h4><p>Trois bénévoles ouvrent un premier local de 40 m² pour accueillir des chats et des chiens.</p></div>
+          </li>
+          <li>
+            <span class="year">2015</span>
+            <div><h4>Ouverture aux NAC</h4><p>L'association commence à recueillir rongeurs, oiseaux et reptiles abandonnés ou saisis.</p></div>
+          </li>
+          <li>
+            <span class="year">2019</span>
+            <div><h4>Nouveau refuge</h4><p>Déménagement dans un site de 800 m² avec infirmerie et espaces extérieurs séparés par espèce.</p></div>
+          </li>
+          <li>
+            <span class="year">2024</span>
+            <div><h4>Programme de suivi post-adoption</h4><p>Mise en place d'un accompagnement systématique pendant les six mois suivant chaque adoption.</p></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head">
+          <h2>Nos valeurs</h2>
+        </div>
+        <div class="values-grid">
+          <div class="value-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C.5 8 2 4 6 4c2 0 3.5 1.2 4 2.5C10.5 5.2 12 4 14 4c4 0 5.5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z"/></svg>
+            <h4>Aucun animal refusé</h4>
+            <p>Âge, comportement ou état de santé ne sont jamais un motif de refus à l'entrée du refuge.</p>
+          </div>
+          <div class="value-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+            <h4>Transparence sur l'origine</h4>
+            <p>Chaque fiche animal indique ce que l'on sait réellement de son passé, sans l'enjoliver.</p>
+          </div>
+          <div class="value-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21v-7a8 8 0 0116 0v7"/><path d="M4 14h16"/></svg>
+            <h4>Un foyer adapté avant tout</h4>
+            <p>Nous privilégions la bonne correspondance entre l'animal et la famille plutôt que la rapidité du placement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head">
+          <h2>Au refuge</h2>
+        </div>
+        <div class="gallery">
+          <div class="shot" style="background:linear-gradient(160deg,#5B7A6B,#1B2B22);">Espace chats</div>
+          <div class="shot" style="background:linear-gradient(160deg,#C89B3C,#7A5A1D);">Parc chiens</div>
+          <div class="shot" style="background:linear-gradient(160deg,#A8503A,#5A2A1E);">Infirmerie</div>
+          <div class="shot" style="background:linear-gradient(160deg,#3C6E63,#1B2B22);">Bénévoles</div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===================== QUIZZ ===================== -->
+  <section id="page-quizz" class="page">
+    <div class="container">
+      <div id="quizHome"><div class="qgrid" id="qgrid"></div></div>
+      <div id="quizRun" class="qrun" hidden></div>
+    </div>
+  </section>
+
+  <!-- ===================== FAMILLE D'ACCUEIL ===================== -->
+  <section id="page-famille" class="page">
+    <div class="adopt-hero"><div class="container">
+      <h1>Devenir famille d'accueil</h1>
+      <p>Accueillir un animal chez vous quelques semaines ou quelques mois, le temps qu'il trouve son foyer définitif. Un engagement limité dans le temps, avec le soutien de l'association.</p>
+    </div></div>
+    <section class="section"><div class="container">
+      <div class="section-head"><h2>Les démarches</h2></div>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><h4>Prendre contact</h4><p>Écrivez-nous en précisant l'espèce que vous pouvez accueillir et votre disponibilité.</p></div>
+        <div class="step"><span class="n">2</span><h4>Entretien et visite</h4><p>Un bénévole échange avec vous et vérifie que le logement convient à l'animal.</p></div>
+        <div class="step"><span class="n">3</span><h4>Choix de l'animal</h4><p>Nous vous proposons un animal adapté à votre espace, votre expérience et votre rythme.</p></div>
+        <div class="step"><span class="n">4</span><h4>Accueil et suivi</h4><p>Un référent reste joignable, et vous nous aidez à présenter l'animal aux futurs adoptants.</p></div>
+      </div>
+    </div></section>
+    <section class="section" style="padding-top:0;"><div class="container"><div class="two-col">
+      <div>
+        <div class="section-head"><h2>Ce que l'association prend en charge</h2></div>
+        <ul class="cond-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Les frais vétérinaires et les traitements.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> L'alimentation et le matériel de base (panier, cage, terrarium…).</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Un référent joignable en cas de question ou d'urgence.</li>
+        </ul>
+        <div class="section-head" style="margin-top:36px;"><h2>Ce que nous attendons de vous</h2></div>
+        <ul class="cond-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Être majeur, avec un logement adapté (et l'accord du propriétaire si besoin).</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Être disponible chaque jour pour les soins et les moments de présence.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Donner régulièrement des nouvelles et accepter les rencontres avec les adoptants.</li>
+        </ul>
+      </div>
+      <div class="contact-card">
+        <h3>Se proposer</h3>
+        <p style="color:var(--paper);opacity:.85;font-size:.93rem;">Dites-nous ce que vous pouvez accueillir et pour combien de temps.</p>
+        <div class="row">accueil@lespattesdabord.fr</div>
+        <div class="row">03 20 00 00 00</div>
+        <a class="btn" style="margin-top:14px;text-decoration:none;" href="mailto:accueil@lespattesdabord.fr">Proposer mon foyer</a>
+      </div>
+    </div></div></section>
+  </section>
+
+  <!-- ===================== JE VEUX ADOPTER ===================== -->
+  <section id="page-adopter" class="page">
+    <div class="adopt-hero">
+      <div class="container">
+        <h1>Adopter, étape par étape</h1>
+        <p>L'adoption chez Les Pattes d'Abord se fait sur plusieurs semaines : nous prenons le temps de vérifier que l'animal et le foyer se conviennent, pour éviter les retours.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="steps">
+          <div class="step">
+            <span class="n">1</span>
+            <h4>Rencontre au refuge</h4>
+            <p>Vous venez rencontrer l'animal qui vous intéresse, sur rendez-vous, avec toute la famille.</p>
+          </div>
+          <div class="step">
+            <span class="n">2</span>
+            <h4>Dossier de candidature</h4>
+            <p>Un questionnaire sur votre logement et votre mode de vie, complété avec un bénévole.</p>
+          </div>
+          <div class="step">
+            <span class="n">3</span>
+            <h4>Visite du logement</h4>
+            <p>Un bref échange à votre domicile pour valider que l'environnement convient à l'animal.</p>
+          </div>
+          <div class="step">
+            <span class="n">4</span>
+            <h4>Signature et départ</h4>
+            <p>Contrat d'adoption, carnet de santé remis, et premier point de suivi fixé avant le départ.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="two-col">
+          <div>
+            <div class="section-head">
+              <h2>Conditions pour adopter</h2>
+            </div>
+            <ul class="cond-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Être majeur et présenter une pièce d'identité.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Justifier d'un domicile stable (bail ou titre de propriété).</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Accord écrit du propriétaire si vous êtes locataire.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Accepter la visite de logement et le suivi à six mois.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg> Régler les frais d'adoption, variables selon l'espèce et l'âge.</li>
+            </ul>
+
+            <div class="section-head" style="margin-top:40px;">
+              <h2>Documents utiles</h2>
+            </div>
+            <div class="doc-list">
+              <div class="doc-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg> Dossier de candidature à l'adoption <span class="ext">PDF</span></div>
+              <div class="doc-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg> Grille tarifaire des frais d'adoption <span class="ext">PDF</span></div>
+              <div class="doc-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg> Modèle de contrat d'adoption <span class="ext">PDF</span></div>
+              <div class="doc-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/></svg> Accord de bailleur (à faire signer) <span class="ext">PDF</span></div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <h3>Nous contacter</h3>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg> adoption@lespattesdabord.fr</div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 2 .7 3a2 2 0 01-.4 2.1L8 10.3a16 16 0 006 6l1.5-1.4a2 2 0 012.1-.4c1 .4 2 .6 3 .7a2 2 0 011.7 2z"/></svg> 03 20 00 00 00</div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> 12 rue des Refuges, 59000 Lille</div>
+            <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> Mardi–samedi, 10h–18h</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2026 Les Pattes d'Abord — association loi 1901</p>
+    <p>Refuge basé à Lille, ouvert du mardi au samedi</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/config.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

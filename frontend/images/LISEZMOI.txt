@@ -1,0 +1,1 @@
+Placez ici vos photos (ex. mimi-1.jpg) puis référencez-les dans js/data.js : champ img pour les bannières, photos pour les fiches animaux.

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Administration — Les Pattes d'Abord</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="staff-body">
+  <header class="staff-top"><a class="staff-brand" href="../index.html">🐾 Les Pattes d'Abord</a><div class="staff-actions"><span id="memberLabel" class="muted"></span><a href="../index.html">Voir le site</a><button class="button-quiet" id="logoutButton">Déconnexion</button></div></header>
+  <main class="admin-shell">
+    <div class="admin-heading"><div><p class="eyebrow">ESPACE PERSONNEL</p><h1>Gestion du refuge</h1><p class="muted">Gérez les annonces, les photos et les documents de l'association.</p></div><button class="button-primary" id="newAnimalButton">＋ Ajouter un animal</button></div>
+    <div class="stats" id="stats"><div class="stat panel"><strong id="availableCount">—</strong><span>En adoption</span></div><div class="stat panel"><strong id="archivedCount">—</strong><span>Dans les archives</span></div></div>
+    <section class="panel toolbar"><div class="tabs"><button class="tab active" data-view="available">Annonces en ligne</button><button class="tab" data-view="archive">Archives</button><button class="tab" data-view="documents">Documents PDF</button><button class="tab admin-only" data-view="members" hidden>Comptes membres</button></div><p class="muted" id="statusMessage" aria-live="polite"></p></section>
+    <section id="animalList" class="admin-animal-list" aria-live="polite"></section>
+
+    <section id="animalEditor" class="panel editor" hidden>
+      <div class="editor-heading"><div><p class="eyebrow">FICHE ANIMAL</p><h2 id="editorTitle">Ajouter un animal</h2></div><button class="button-quiet" id="closeEditor">Fermer</button></div>
+      <form id="animalForm" class="form-grid">
+        <input type="hidden" id="animalId">
+        <div><label for="animalName">Nom *</label><input id="animalName" required maxlength="100"></div>
+        <div><label for="animalSpecies">Espèce *</label><select id="animalSpecies" required><option value="chats">Chat</option><option value="chiens">Chien</option><option value="rongeurs">Rongeur</option><option value="oiseaux">Oiseau</option><option value="reptiles">Reptile</option></select></div>
+        <div><label for="animalBreed">Race</label><input id="animalBreed"></div>
+        <div><label for="animalSex">Sexe</label><select id="animalSex"><option value="">Non renseigné</option><option>Femelle</option><option>Mâle</option></select></div>
+        <div><label for="animalAge">Âge (ex. 2 ans)</label><input id="animalAge"></div>
+        <div><label for="animalAgeCategory">Catégorie d'âge</label><select id="animalAgeCategory"><option value="jeune">Jeune</option><option value="adulte" selected>Adulte</option><option value="senior">Senior</option></select></div>
+        <div><label for="animalCharacter">Caractère</label><select id="animalCharacter"><option value="">Non renseigné</option><option>calme</option><option>joueur</option><option>affectueux</option><option>indépendant</option><option>curieux</option><option>protecteur</option><option>sociable</option><option>timide</option></select></div>
+        <div><label for="animalSocial">Vie sociale</label><select id="animalSocial"><option value="">Non renseigné</option><option value="seul">Préfère vivre seul</option><option value="groupe">À l'aise en groupe</option><option value="enfants">Compatible enfants</option></select></div>
+        <div><label for="animalWeight">Poids</label><input id="animalWeight" placeholder="Ex. 4,5 kg"></div>
+        <div class="full"><label for="animalDescription">Description *</label><textarea id="animalDescription" rows="4" required maxlength="5000"></textarea></div>
+        <div class="full"><label for="animalHealth">Informations de santé / maladies</label><textarea id="animalHealth" rows="3" placeholder="Traitements, précautions et suivi vétérinaire…"></textarea></div>
+        <div class="full"><label for="animalPhotos">Photos (JPEG, PNG ou WebP, 8 Mo maximum chacune)</label><input id="animalPhotos" type="file" accept="image/jpeg,image/png,image/webp" multiple><div id="photoPreview" class="photo-preview"></div></div>
+        <div class="full editor-buttons"><button type="button" class="button-quiet" id="cancelEditor">Annuler</button><button type="submit" class="button-primary" id="saveAnimal">Enregistrer la fiche</button></div>
+      </form>
+    </section>
+
+    <section id="documentsPanel" class="panel editor" hidden><h2>Documents de l'association</h2><p class="muted">Les PDF déposés ici sont privés. Seuls les membres connectés peuvent les télécharger.</p><form id="documentForm" class="upload-row"><input type="file" id="documentFile" accept="application/pdf" required><button class="button-primary">Déposer le PDF</button></form><div id="documentList"></div></section>
+    <section id="membersPanel" class="panel editor" hidden><h2>Créer un compte membre</h2><p class="muted">Les comptes sont créés par l'administrateur. Tous les membres ont les mêmes droits sur les annonces.</p><form id="memberForm" class="form-grid"><div><label for="memberUsername">Nom d'utilisateur</label><input id="memberUsername" required minlength="3" maxlength="32" pattern="[a-zA-Z0-9._-]+"></div><div><label for="memberEmail">E-mail de connexion</label><input id="memberEmail" type="email" required></div><div><label for="memberDisplayName">Nom affiché</label><input id="memberDisplayName"></div><div><label for="memberPassword">Mot de passe temporaire (12 caractères minimum)</label><input id="memberPassword" type="password" required minlength="12"></div><div class="full"><button class="button-primary">Créer le compte</button></div></form><div id="memberList"></div></section>
+  </main>
+  <script src="../js/config.js"></script><script src="../js/auth-client.js"></script><script src="../js/admin.js"></script>
+</body></html>
