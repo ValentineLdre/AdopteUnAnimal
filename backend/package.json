@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",
-    "check": "node --check src/server.js && node --check src/routes/auth.js && node --check src/routes/animals.js && node --check src/routes/documents.js",
+    "check": "node --check src/server.js && node --check src/routes/auth.js && node --check src/routes/animals.js && node --check src/routes/documents.js && node --check src/routes/uploads.js",
     "import:demo": "node scripts/import-demo-animals.js"
   },
   "engines": { "node": ">=20" },

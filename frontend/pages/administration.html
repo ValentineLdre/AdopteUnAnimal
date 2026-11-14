@@ -38,5 +38,8 @@
     <section id="documentsPanel" class="panel editor" hidden><h2>Documents de l'association</h2><p class="muted">Les PDF déposés ici sont privés. Seuls les membres connectés peuvent les télécharger.</p><form id="documentForm" class="upload-row"><input type="file" id="documentFile" accept="application/pdf" required><button class="button-primary">Déposer le PDF</button></form><div id="documentList"></div></section>
     <section id="membersPanel" class="panel editor" hidden><h2>Créer un compte membre</h2><p class="muted">Les comptes sont créés par l'administrateur. Tous les membres ont les mêmes droits sur les annonces.</p><form id="memberForm" class="form-grid"><div><label for="memberUsername">Nom d'utilisateur</label><input id="memberUsername" required minlength="3" maxlength="32" pattern="[a-zA-Z0-9._-]+"></div><div><label for="memberEmail">E-mail de connexion</label><input id="memberEmail" type="email" required></div><div><label for="memberDisplayName">Nom affiché</label><input id="memberDisplayName"></div><div><label for="memberPassword">Mot de passe temporaire (12 caractères minimum)</label><input id="memberPassword" type="password" required minlength="12"></div><div class="full"><button class="button-primary">Créer le compte</button></div></form><div id="memberList"></div></section>
   </main>
-  <script src="../js/config.js"></script><script src="../js/auth-client.js"></script><script src="../js/admin.js"></script>
+  <script src="../js/config.js"></script>
+<script src="../js/auth-client.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tus-js-client@4.3.1/dist/tus.min.js"></script>
+<script src="../js/admin.js"></script>
 </body></html>

@@ -38,6 +38,45 @@ function notice(message,isError=false){
   $('statusMessage').style.color=isError?'#a12d24':'';
 }
 
+
+function uploadTus(file, signed, bucketName) {
+  if (!window.tus?.Upload) {
+    throw new Error('La bibliothèque de transfert TUS est indisponible.');
+  }
+
+  return new Promise((resolve, reject) => {
+
+
+    const upload = new window.tus.Upload(file, {
+      endpoint: signed.endpoint,
+      headers: {
+        'x-signature': signed.token
+      },
+      metadata: {
+        bucketName,
+        objectName: signed.path,
+        contentType: file.type,
+        cacheControl: '3600'
+      },
+      chunkSize: 6 * 1024 * 1024,
+      retryDelays: [0, 3000, 5000, 10000, 20000],
+      uploadDataDuringCreation: true,
+      removeFingerprintOnSuccess: true,
+
+      onError(error) {
+        reject(error);
+      },
+
+      onSuccess() {
+        resolve();
+      }
+    });
+
+    upload.start();
+  });
+}
+
+
 async function init(){
   try{
     const result=await StaffAuth.api('/api/auth/me');
@@ -214,18 +253,47 @@ $('animalForm').addEventListener('submit',async event=>{
     );
 
     const animalId=result.animal.id;
-    const files=$('animalPhotos').files;
+    const files=[...$('animalPhotos').files];
 
     if(files.length){
-      const form=new FormData();
+      const signed=await StaffAuth.api(
+        `/api/uploads/animals/${animalId}/photos/sign`,
+        {
+          method:'POST',
+          body:JSON.stringify({
+            files:files.map(file=>({
+              name:file.name,
+              type:file.type,
+              size:file.size
+            }))
+          })
+        }
+      );
 
-      [...files].forEach(file=>form.append('photos',file));
+      for(let i=0;i<files.length;i++){
+        await uploadTus(
+  files[i],
+  {...signed.uploads[i],endpoint:signed.endpoint},
+  'animal-photos'
+);
+      }
 
-      await StaffAuth.api(`/api/animals/${animalId}/photos`,{
-        method:'POST',
-        body:form
-      });
+      await StaffAuth.api(
+        `/api/uploads/animals/${animalId}/photos/confirm`,
+        {
+          method:'POST',
+          body:JSON.stringify({
+            files:signed.uploads.map(file=>({
+              uploadId:file.uploadId,
+              path:file.path,
+              name:file.name,
+              type:file.type
+            }))
+          })
+        }
+      );
     }
+
 
     closeEditor();
     await loadAnimals();
@@ -287,20 +355,37 @@ $('animalList').addEventListener('click',async event=>{
 });
 
 // Déposer un document PDF
+
 $('documentForm').addEventListener('submit',async event=>{
   event.preventDefault();
 
   const file=$('documentFile').files[0];
   if(!file)return;
 
-  const form=new FormData();
-  form.append('document',file);
+  const button=$('documentForm').querySelector('button[type="submit"]');
+  if(button)button.disabled=true;
 
   try{
-    await StaffAuth.api('/api/documents',{
-      method:'POST',
-      body:form
-    });
+    const signed=await StaffAuth.api('/api/uploads/documents/sign',{
+  method:'POST',
+  body:JSON.stringify({
+    name:file.name,
+    type:file.type,
+    size:file.size
+  })
+});
+
+await uploadTus(file,signed,'association-documents');
+
+await StaffAuth.api('/api/uploads/documents/confirm',{
+  method:'POST',
+  body:JSON.stringify({
+    uploadId:signed.uploadId,
+    path:signed.path,
+    name:signed.name,
+    type:signed.type
+  })
+});
 
     $('documentForm').reset();
 
@@ -309,8 +394,12 @@ $('documentForm').addEventListener('submit',async event=>{
 
   }catch(error){
     notice(error.message,true);
+
+  }finally{
+    if(button)button.disabled=false;
   }
 });
+
 
 // Charger et afficher les documents avec leurs boutons
 async function loadDocuments(){
