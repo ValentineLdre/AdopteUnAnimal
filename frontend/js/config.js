@@ -1,5 +1,4 @@
-// URL de l'API Express. En local : http://localhost:3000
-// Après déploiement, remplacez cette valeur par l'URL HTTPS du serveur Render.
+﻿// URL DE L'API EXPRESS HEBERGEE SUR VERCEL
 window.APP_CONFIG = {
-  API_BASE_URL: 'http://localhost:3000'
+  API_BASE_URL: 'https://adopteunanimal-api.vercel.app'
 };
