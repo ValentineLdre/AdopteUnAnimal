@@ -461,7 +461,7 @@ $('documentList').addEventListener('click',async event=>{
 
   try{
     const result=await StaffAuth.api(
-      `/api/documents/${button.dataset.docId}/url`
+      `/api/documents/${button.dataset.docId}`
     );
 
     window.open(result.url,'_blank','noopener');

@@ -64,7 +64,7 @@ router.get('/', requireAuth, asyncRoute(async (_req, res) => {
 }));
 
 // Obtenir un lien temporaire pour ouvrir un PDF
-router.get('/:id/url', requireAuth, asyncRoute(async (req, res) => {
+router.get('/:id', requireAuth, asyncRoute(async (req, res) => {
   const { data: doc, error } = await supabaseAdmin
     .from('documents')
     .select('path')
